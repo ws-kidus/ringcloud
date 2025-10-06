@@ -10,74 +10,67 @@ import 'package:ringcloud/app/features/dashboard/presentation/ui/pages/settings_
 import 'package:ringcloud/app/not_found_screen.dart';
 
 class AppRoutes {
-  static GoRouter get routerConfig =>
-      GoRouter(
-        errorBuilder: (context, state) => NotFoundScreen(),
-        routes: [
-
-          ///Auth
-          StatefulShellRoute.indexedStack(
-            builder:
-                (context, goRouterState, navigationShell) =>
-                MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => DashboardBloc(),
-                    ),
-                  ],
-                  child: Dashboard(
-                    navigationShell: navigationShell,
-                    location: goRouterState.uri.toString(),
-                  ),
-                ),
-            branches: [
-              StatefulShellBranch(
-                routes: [
-                  GoRoute(
-                    name: FavoritePage.routeName,
-                    path: "/favorite",
-                    builder: (context, state) => FavoritePage(),
-                  ),
-                ],
+  static GoRouter get routerConfig => GoRouter(
+    errorBuilder: (context, state) => NotFoundScreen(),
+    routes: [
+      ///Auth
+      StatefulShellRoute.indexedStack(
+        builder:
+            (context, goRouterState, navigationShell) => MultiBlocProvider(
+              providers: [BlocProvider(create: (context) => DashboardBloc())],
+              child: Dashboard(
+                navigationShell: navigationShell,
+                location: goRouterState.uri.toString(),
               ),
-              StatefulShellBranch(
-                routes: [
-                  GoRoute(
-                    name: CallLogPage.routeName,
-                    path: "/call-log",
-                    builder: (context, state) => CallLogPage(),
-                  ),
-                ],
+            ),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                name: FavoritePage.routeName,
+                path: "/favorite",
+                builder: (context, state) => FavoritePage(),
               ),
-              StatefulShellBranch(
-                routes: [
-                  GoRoute(
-                    name: DiallerPage.routeName,
-                    path: "/",
-                    builder: (context, state) => DiallerPage(),
-                  ),
-                ],
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                name: CallLogPage.routeName,
+                path: "/call-log",
+                builder: (context, state) => CallLogPage(),
               ),
-              StatefulShellBranch(
-                routes: [
-                  GoRoute(
-                    name: ContactsPage.routeName,
-                    path: "/contacts",
-                    builder: (context, state) => ContactsPage(),
-                  ),
-                ],
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                name: DiallerPage.routeName,
+                path: "/",
+                builder: (context, state) => DiallerPage(),
               ),
-              StatefulShellBranch(
-                routes: [
-                  GoRoute(
-                    name: SettingsPage.routeName,
-                    path: "/settings",
-                    builder: (context, state) => SettingsPage(),
-                  ),
-                ],
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                name: ContactsPage.routeName,
+                path: "/contacts",
+                builder: (context, state) => ContactsPage(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                name: SettingsPage.routeName,
+                path: "/settings",
+                builder: (context, state) => SettingsPage(),
               ),
             ],
           ),
         ],
-      );
+      ),
+    ],
+  );
 }

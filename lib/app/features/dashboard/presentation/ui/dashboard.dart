@@ -22,7 +22,7 @@ class _DashboardState extends State<Dashboard> {
   final _sipService = sl<SipService>();
 
   _initializeSip() async {
-    _sipService.init();
+    await _sipService.init();
     _sipService.connect();
   }
 
