@@ -11,31 +11,31 @@ abstract class SipService {
 
   Stream<SipConnectionState> getConnectionStatus();
 
-  // call({required String number});
-  //
-  // answer();
-  //
-  // end();
-  //
-  // getCurrentCall();
-  //
-  // mute();
-  //
-  // unMute();
-  //
-  // hold();
-  //
-  // unHold();
-  //
-  // outputSpeaker();
-  //
-  // outputEarpiece();
-  //
-  // sendDTMF({required String number});
-  //
-  // blindTransfer();
-  //
-  // attendedTransfer();
+  call({required String number});
+
+  end();
+
+  getCurrentCall();
+
+  mute();
+
+  unMute();
+
+  hold();
+
+  unHold();
+
+  outputSpeaker();
+
+  outputEarpiece();
+
+  sendDTMF({required String number});
+
+  blindTransfer({required String number});
+
+  attendedTransfer({required String number});
+
+  Stream<SipCallState> getCallState();
 }
 
 class SipServiceImpl implements SipService {
@@ -53,8 +53,8 @@ class SipServiceImpl implements SipService {
         username: "277S837013",
         password: "gLMTUXP7wkr9WNOm",
         host: "etw-pbx-sip2.websprix.com",
-        port: "5060",
-        displayName: "Kidus G/Michael"
+        port: "8089",
+        displayName: "Kidus G/Michael",
       ),
     );
   }
@@ -79,5 +79,72 @@ class SipServiceImpl implements SipService {
       }
       return SipConnectionState.loading;
     });
+  }
+
+  @override
+  call({required String number}) {
+    return _sipManager.startCall(number);
+  }
+
+  @override
+  end() {
+    return _sipManager.endCall();
+  }
+
+  @override
+  getCurrentCall() {
+    // TODO: implement getCurrentCall
+    throw UnimplementedError();
+  }
+
+  @override
+  mute() {
+    return _sipManager.muteCall();
+  }
+
+  @override
+  unMute() {
+    return _sipManager.unmuteCall();
+  }
+
+  @override
+  hold() {
+    return _sipManager.holdCall();
+  }
+
+  @override
+  unHold() {
+    return _sipManager.unholdCall();
+  }
+
+  @override
+  outputSpeaker() {
+    return _sipManager.toggleSpeaker();
+  }
+
+  @override
+  outputEarpiece() {
+    return _sipManager.toggleSpeaker();
+  }
+
+  @override
+  sendDTMF({required String number}) {
+    return _sipManager.sendDtmf(number);
+  }
+
+  @override
+  blindTransfer({required String number}) {
+    return _sipManager.sendDtmf("1");
+  }
+
+  @override
+  attendedTransfer({required String number}) {
+    return _sipManager.sendDtmf("2");
+  }
+
+  @override
+  Stream<SipCallState> getCallState() {
+    // TODO: implement getCallState
+    throw UnimplementedError();
   }
 }
